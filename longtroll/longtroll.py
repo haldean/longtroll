@@ -30,8 +30,9 @@ def get_user_processes(user):
       print('Caught exception for line: %s' % line)
       raise
 
-  ps_out = subprocess.check_output([
-    'ps', '-U %s' % user, '-o etime,pid,ppid,command'])
+  ps_out = subprocess.Popen([
+    'ps', '-U %s' % user, '-o etime,pid,ppid,command'],
+    stdout=subprocess.PIPE).communicate()[0]
   for line in ps_out.split('\n')[1:]:
     if line: yield line_to_dict(line)
 
@@ -76,7 +77,7 @@ def main():
 
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument(
-      '--config_file', '-c', metavar='FILE', default='~/.longtroll',
+      '--config_file', '-c', metavar='FILE', default='~/.longtrollrc',
       help='Configuration file to load')
   parser.add_argument(
       '--ppid', '-p', default=os.getppid(), type=int,
