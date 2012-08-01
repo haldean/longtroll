@@ -5,7 +5,7 @@ setup(
     version='1.0',
     license='MIT License',
     url='https://github.com/haldean/longtroll',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
 
     author='Will Haldean Brown',
     author_email='will.h.brown@gmail.com',
