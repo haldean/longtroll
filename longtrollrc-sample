@@ -1,0 +1,2 @@
+seconds 5
+notify echo <cmd> finished | wall
