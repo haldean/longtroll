@@ -30,9 +30,9 @@ def get_user_processes(user):
       print('Caught exception for line: %s' % line)
       raise
 
-  ps_out = subprocess.Popen([
-    'ps', '-U %s' % user, '-o etime,pid,ppid,command'],
-    stdout=subprocess.PIPE).communicate()[0]
+  ps_out = subprocess.Popen(' '.join([
+    'ps', '-U %s' % user, '-o etime,pid,ppid,command']),
+    shell=True, stdout=subprocess.PIPE).communicate()[0]
   for line in ps_out.split('\n')[1:]:
     if line: yield line_to_dict(line)
 
